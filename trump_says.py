@@ -51,7 +51,7 @@ class TweetFetcher():
 		resp = urlopen(req)
 		if resp.code == 200:
 			content = resp.read()
-			return json.loads(content)
+			return json.loads(content.decode())
 
 	def build_request(self, handle):
 		if self.bearer_token:
@@ -63,22 +63,22 @@ class TweetFetcher():
 			return self.build_request()
 
 	def fetch_bearer_token(self):
-		req = Request(TweetFetcher.OAUTH_TOKEN_URL, 'grant_type=client_credentials')
+		req = Request(TweetFetcher.OAUTH_TOKEN_URL, b'grant_type=client_credentials')
 		auth_header = self.generate_bearer_token_credentials()
 		req.add_header('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8')
-		req.add_header('Authorization', 'Basic {0}'.format(auth_header))
+		req.add_header('Authorization', 'Basic {0}'.format(auth_header.decode()))
 		resp = urlopen(req)
 		if resp.code == 200:
 			content = resp.read()
-			token = json.loads(content)['access_token']
+			token = json.loads(content.decode())['access_token']
 			return token
 		else:
 			print("Error fetching bearer token")
 
 	def generate_bearer_token_credentials(self):
 		token = '{0}:{1}'.format(TweetFetcher.CONSUMER_KEY,
-								 TweetFetcher.CONSUMER_SECRET)
-		return base64.b64encode(token)
+					 TweetFetcher.CONSUMER_SECRET)
+		return base64.b64encode(token.encode('utf-8'))
 
 	@classmethod
 	def timestamp(cls):
