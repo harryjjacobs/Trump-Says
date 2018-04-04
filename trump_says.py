@@ -121,7 +121,7 @@ class ASCIITrump():
 		the result.
 		"""
 		if len(message) > self.max_line_width * self.line_count:
-			self.log('Error, message too long')
+			self.log('Error', 'message too long')
 			return False
 
 		# set up lines list to store the lines in. Pad all lines
@@ -145,11 +145,11 @@ class ASCIITrump():
 
 			elif len(word) > self.max_line_width:
 				# the word is too big for our speech bubble ( > max_line_width)
-				self.log("Error - Trump doesn't know any words as long as that")
+				self.log('Error', 'Trump doesn\'t know any words as long as that (word too long)')
 				return False
 
 			elif len(lines[i] + word) + 1 > self.max_line_width:
-				self.log('Error, message too long' + word)
+				self.log('Error', 'message too long' + word)
 				return False
 
 		# pad the last line
@@ -163,9 +163,9 @@ class ASCIITrump():
 		print(result)
 		return True
 
-	def log(self, message):
+	def log(self, title, message):
 		if not self.quiet:
-			print(message)
+			print('{0}: {1}'.format(title, message))
 
 
 def fetch_tweets():
