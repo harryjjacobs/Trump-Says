@@ -36,8 +36,8 @@ class TweetFetcher():
 	"""
 	BASE_URL = 'https://api.twitter.com/1.1/statuses/user_timeline.json'
 	QUERY_STRING = '?screen_name={handle}'
-	CONSUMER_KEY = 'pZaFxGSR8yc9CC2GkZ9iGBRVY'
-	CONSUMER_SECRET = 'sil6xmNLB3AWxq6PnVek8PX2FNImkHtqyyPxJLFlUOXRE7DqwG'
+	CONSUMER_KEY = '<consumer_key>'
+	CONSUMER_SECRET = '<consumer_secret>'
 	OAUTH_TOKEN_URL = 'https://api.twitter.com/oauth2/token'
 
 	def __init__(self):
